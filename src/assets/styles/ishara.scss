@@ -647,7 +647,7 @@ custom-salla-product-card:empty{display:block;min-height:330px}
 salla-payments{display:block;min-height:32px}
 
 /* home sections built after load: space is held so nothing below jumps (CLS) */
-.ish-slot--flash{min-height:420px}.ish-slot--setup{min-height:600px}.ish-slot--quiz{min-height:500px}.ish-slot--compare{min-height:560px}.ish-basics.ish-slot{min-height:1400px}
-@media (max-width:767px){.ish-slot--flash{min-height:520px}.ish-slot--setup{min-height:1150px}.ish-slot--quiz{min-height:760px}.ish-slot--compare{min-height:520px}.ish-basics.ish-slot{min-height:1600px}}
-.ish-slot.ish-slot--done{min-height:0}
+.ish-hold--flash{min-height:420px}.ish-hold--setup{min-height:600px}.ish-hold--quiz{min-height:500px}.ish-hold--compare{min-height:560px}.ish-basics.ish-hold{min-height:1400px}
+@media (max-width:767px){.ish-hold--flash{min-height:520px}.ish-hold--setup{min-height:1150px}.ish-hold--quiz{min-height:760px}.ish-hold--compare{min-height:520px}.ish-basics.ish-hold{min-height:1600px}}
+.ish-hold.ish-hold--done{min-height:0}
 .ish-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}

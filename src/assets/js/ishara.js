@@ -1313,9 +1313,9 @@
   }
   // a box that holds space for a section built later; let go once its content is about as tall (or gone)
   function slot(parent, k, el) {
-    var d = el || document.createElement('div'); d.classList.add('ish-slot'); if (k) d.classList.add('ish-slot--' + k); if (!el) parent.appendChild(d);
+    var d = el || document.createElement('div'); d.classList.add('ish-hold'); if (k) d.classList.add('ish-hold--' + k); if (!el) parent.appendChild(d);
     var ro, timer, need = function () { return parseFloat(getComputedStyle(d).minHeight) || 0; };
-    var done = function () { d.classList.add('ish-slot--done'); if (ro) ro.disconnect(); mo.disconnect(); clearTimeout(timer); };
+    var done = function () { d.classList.add('ish-hold--done'); if (ro) ro.disconnect(); mo.disconnect(); clearTimeout(timer); };
     var check = function () { if (!d.firstElementChild) return done(); var h = 0; for (var c = d.firstElementChild; c; c = c.nextElementSibling) h += c.offsetHeight; if (h >= need() * 0.9) done(); };
     if (window.ResizeObserver) ro = new ResizeObserver(check);
     var mo = new MutationObserver(function () { if (!timer) timer = setTimeout(done, 6000); for (var c = d.firstElementChild; c; c = c.nextElementSibling) if (ro) ro.observe(c); check(); });
