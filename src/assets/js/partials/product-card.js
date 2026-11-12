@@ -180,6 +180,7 @@ class ProductCard extends HTMLElement {
     this.effectiveStatus = (this.product.is_out_of_stock && window.notify_when_available_in_card && !['donating', 'financial_support'].includes(this.product?.type))
       ? 'out-and-notify'
       : this.product.status;
+      if (this.eagerImg === undefined) { ProductCard.seen = (ProductCard.seen || 0) + 1; this.eagerImg = ProductCard.seen <= 4; }
       this.innerHTML = `
         <div class="${!this.fullImage ? 's-product-card-image' : 's-product-card-image-full'}">
           <a href="${this.product?.url}" aria-label="${this.escapeHTML(this.product?.image?.alt || this.product.name)}">
@@ -191,7 +192,7 @@ class ProductCard extends HTMLElement {
                 : 'cover'}"
               src="${this.product?.image?.url || this.product?.thumbnail || this.placeholder || ''}"
               alt="${this.escapeHTML(this.product?.image?.alt || this.product.name)}"
-              loading="lazy"
+              ${this.eagerImg ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"
             />
             ${!this.fullImage && !this.minimal ? this.getProductBadge() : ''}
           </a>

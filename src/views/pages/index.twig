@@ -6,7 +6,15 @@
 | page.slug        | string     | ex: "cat.show"                                                      |
 #}
 {% extends "layouts.master" %}
+{% block head_scripts %}
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&q=70&w=800" media="(max-width: 900px)" fetchpriority="high">
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&q=70&w=1800" media="(min-width: 901px)" fetchpriority="high">
+    <style>#ish-hero-ph .ish-slide:first-child{background-image:url(https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&q=70&w=800)}@media(min-width:901px){#ish-hero-ph .ish-slide:first-child{background-image:url(https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&q=70&w=1800)}}</style>
+{% endblock %}
 {% block content %}
+    {# Ishara: the first banner slide is plain HTML so it shows before any script runs (ishara.js adds the other slides) #}
+    <section class="ish ish-sec ish-hero" id="ish-hero-ph"><div class="ish-wrap"><div class="ish-slider"><div class="ish-slide ish-photo on"><div class="ish-slide__txt"><span class="ish-pill">وصل حديثاً</span><h2>تشكيلة الموسم الجديدة</h2><p>قطع مختارة بعناية، وتوصيل سريع لكل مدن المملكة.</p><a class="ish-btn ish-btn--light" href="{{ store.url }}">تسوّق الآن</a></div></div></div></div></section>
     {% component home %}
 {% endblock %}
 {% block scripts %}

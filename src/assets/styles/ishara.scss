@@ -631,3 +631,9 @@ html.ish-noscroll{overflow:hidden}
 
 /* background photos (CONFIG.photos, slides and banners) */
 .ish-photo{background-color:var(--ish-ink);background-size:cover;background-position:center;background-repeat:no-repeat}
+
+/* speed: keep the page from jumping while Salla loads the products */
+.s-product-card-vertical .s-product-card-image{aspect-ratio:1/1}
+.s-block--latest-products salla-products-list:not(:has(custom-salla-product-card)),
+.product-index salla-products-list:not(:has(custom-salla-product-card)){display:block;min-height:100vh}
+custom-salla-product-card:empty{display:block;min-height:330px}

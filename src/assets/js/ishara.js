@@ -566,6 +566,7 @@
       if (ph) {
         var box = document.createElement('div'); box.innerHTML = slides + dots; box.removeChild(box.firstChild);
         var sl = $('.ish-slider', ph); while (box.firstChild) sl.appendChild(box.firstChild);
+        var b0 = $('.ish-slide .ish-btn', ph); if (b0) b0.setAttribute('href', homeUrl(c.slides[0].url, goUrl(c.slides[0].go)));
       } else sec.firstChild.innerHTML = '<div class="ish-slider">' + slides + dots + '</div>';
       var later = function () { $$('[data-ish-style]', sec).forEach(function (el) { el.setAttribute('style', el.getAttribute('data-ish-style')); el.removeAttribute('data-ish-style'); }); };
       if (document.readyState === 'complete') setTimeout(later, 300); else window.addEventListener('load', function () { setTimeout(later, 300); });
@@ -1309,6 +1310,8 @@
     if (isHome) {
       var mainEl = $('.app-inner > main') || $('main');
       var themeHero = mainEl && $(CONFIG.home.insertAfter, mainEl);
+      var staticHero = document.getElementById('ish-hero-ph');
+      if (staticHero && (themeHero || !BASICS.hero.enabled)) staticHero.remove();
       var holder = homeAnchor();
       if (holder) {
         if (!themeHero) hero(holder);                       // banner first
