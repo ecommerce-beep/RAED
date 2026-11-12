@@ -1,9 +1,13 @@
 module.exports = {
     important: false,
-    content: [
-        "src/views/**/*.twig",
-        "src/assets/js/**/*.js",
-    ],
+    content: {
+        files: [
+            "src/views/**/*.twig",
+            "src/assets/js/**/*.js",
+        ],
+        // the home page's inline CSS (tools/critical) is build output, not class names
+        transform: { twig: (src) => src.replace(/<style id="ish-critical">[\s\S]*?<\/style>/, '') },
+    },
     darkMode: 'class', // or 'media' or 'class'
     theme   : {
         container : {

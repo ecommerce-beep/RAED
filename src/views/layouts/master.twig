@@ -83,8 +83,10 @@
     {% hook 'head:start' %}
     {% hook head %}
     {% block styles %}{% endblock %}
+    {% block main_css %}
     <link rel="stylesheet" href="{{ 'app.css' | asset }}">
     <link rel="stylesheet" href="{{ 'ishara.css' | asset }}">
+    {% endblock %}
     {# store font + icon font: loaded without blocking the first paint #}
     {% set font_css = theme.font.path ? theme.font.path|cdn : null %}
     {% if font_css %}

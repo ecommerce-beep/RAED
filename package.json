@@ -6,7 +6,7 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "test": "node --test test/",
-    "production": "webpack --mode production",
+    "production": "webpack --mode production && node tools/critical/build.js",
     "prod": "webpack --mode production",
     "development": "webpack --mode development",
     "watch": "webpack --mode development --watch"
