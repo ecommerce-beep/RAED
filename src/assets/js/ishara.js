@@ -1311,6 +1311,17 @@
     var go = function () { setTimeout(function () { idle(next, { timeout: 1500 }); }, 200); };
     if (document.readyState === 'complete') go(); else window.addEventListener('load', go);
   }
+  // build a section only when the shopper scrolls near it (the first screen never pays for it)
+  function whenNear(el, fn) {
+    if (!window.IntersectionObserver) return afterLoad([fn]);
+    var idle = window.requestIdleCallback || function (f) { return setTimeout(f, 1); };
+    var io = new IntersectionObserver(function (es) {
+      if (!es.some(function (e) { return e.isIntersecting; })) return;
+      io.disconnect(); idle(function () { try { fn(); } catch (e) { if (window.console) console.error(e); } }, { timeout: 300 });
+    }, { rootMargin: '400px 0px' });
+    var arm = function () { setTimeout(function () { io.observe(el); }, 300); };
+    if (document.readyState === 'complete') arm(); else window.addEventListener('load', arm);
+  }
   // a box that holds space for a section built later; let go once its content is about as tall (or gone)
   function slot(parent, k, el) {
     var d = el || document.createElement('div'); d.classList.add('ish-hold'); if (k) d.classList.add('ish-hold--' + k); if (!el) parent.appendChild(d);
@@ -1350,23 +1361,24 @@
         var C = CONFIG.home, sl = {};
         ['flash', 'setup', 'quiz', 'compare'].forEach(function (k) { if (C[k === 'flash' ? 'flashSale' : k].enabled) sl[k] = slot(holder, k); });
         slot(null, '', bh);
-        // the sections below the fold are built after the page has loaded, one at a time,
+        // the sections below the fold are built only when the shopper scrolls near them,
         // so they don't slow down the first screen (speed score: LCP and blocking time)
-        afterLoad([function () { flashSale(sl.flash || holder); }, function () { setup(sl.setup || holder); }, function () { quiz(sl.quiz || holder); },
-                   function () { compare(sl.compare || holder); }, function () { basics(bh); }]);
+        var lazy = function (k, f) { if (sl[k]) whenNear(sl[k], function () { f(sl[k]); }); else afterLoad([function () { f(holder); }]); };
+        lazy('flash', flashSale); lazy('setup', setup); lazy('quiz', quiz); lazy('compare', compare);
+        whenNear(bh, function () { basics(bh); });
       }
     }
     if (slug === 'product.single' || document.body.classList.contains('product-single')) productPage();
     if (slug === 'product.index' || document.body.classList.contains('product-index')) collectionPage();
+    // extras (card buttons, mobile bar, cart drawer, back-to-top) wait until the page has loaded
+    afterLoad([function () {
     if (CONFIG.listing.quickView || CONFIG.listing.compare) {
       enhanceCards(document);
       new MutationObserver(function (ms) { ms.forEach(function (m) { m.addedNodes.forEach(function (n) { if (n.nodeType === 1) enhanceCards(n.matches && n.matches('custom-salla-product-card') ? n.parentNode : n); }); }); })
         .observe(document.body, { childList: true, subtree: true });
     }
     if (slug === 'cart' || document.body.classList.contains('cart')) freeShipping();
-    backToTop();
-    mobileBar();
-    cartDrawer();
+    }, backToTop, mobileBar, cartDrawer]);
   }
   if (window.salla && typeof salla.onReady === 'function') salla.onReady(start);
   else document.addEventListener('DOMContentLoaded', function () { (window.salla && salla.onReady) ? salla.onReady(start) : start(); });
