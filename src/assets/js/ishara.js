@@ -1304,6 +1304,13 @@
   }
 
   /* ===================== 7) START ===================== */
+  // run each step in its own task once the page has loaded and the browser is idle
+  function afterLoad(steps) {
+    var idle = window.requestIdleCallback || function (f) { return setTimeout(f, 1); };
+    var next = function () { var f = steps.shift(); if (!f) return; try { f(); } catch (e) { if (window.console) console.error(e); } idle(next, { timeout: 1000 }); };
+    var go = function () { setTimeout(function () { idle(next, { timeout: 1500 }); }, 200); };
+    if (document.readyState === 'complete') go(); else window.addEventListener('load', go);
+  }
   function start() {
     var slug = page().slug || '';
     var isHome = slug === 'index' || document.body.classList.contains('index');
@@ -1315,11 +1322,14 @@
       var holder = homeAnchor();
       if (holder) {
         if (!themeHero) hero(holder);                       // banner first
-        flashSale(holder); setup(holder); quiz(holder); compare(holder);   // advanced
-        var bh = document.createElement('div'); bh.className = 'ish-home ish-basics';
-        holder.parentNode.insertBefore(bh, holder.nextSibling); basics(bh);  // basics
         var latest = CONFIG.home.latestFirst && $(CONFIG.home.latestFirst, mainEl);
         if (latest && !latest.closest('.ish')) holder.parentNode.insertBefore(latest, holder);   // new products right after the hero
+        var bh = document.createElement('div'); bh.className = 'ish-home ish-basics';
+        holder.parentNode.insertBefore(bh, holder.nextSibling);
+        // the sections below the fold are built after the page has loaded, one at a time,
+        // so they don't slow down the first screen (speed score: LCP and blocking time)
+        afterLoad([function () { flashSale(holder); }, function () { setup(holder); }, function () { quiz(holder); },
+                   function () { compare(holder); }, function () { basics(bh); }]);
       }
     }
     if (slug === 'product.single' || document.body.classList.contains('product-single')) productPage();
