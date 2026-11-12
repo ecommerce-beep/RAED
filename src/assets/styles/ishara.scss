@@ -5,6 +5,9 @@
    ===================================================================== */
 :root{
   --ish-primary: var(--color-primary, #1746D1);
+  --ish-primary-text: var(--ish-primary);
+  --ish-on-primary: var(--color-primary-reverse, #fff);
+  --ish-orange-text:#C2410C;
   --ish-ink:#0B1220; --ish-ink2:#121B30; --ish-cyan:#00C2FF; --ish-orange:#FF6A1A;
   --ish-cloud:#F4F6FA; --ish-line:#E3E7EF; --ish-muted:#5B6475; --ish-text:#0B1220;
   --ish-success:#12A150; --ish-star:#FFB020; --ish-radius:22px;
@@ -15,16 +18,16 @@
 .ish-sec{padding:48px 0}
 .ish-h{font-size:28px;line-height:1.3;font-weight:800;margin:0}
 .ish-h-sm{font-size:20px;font-weight:800;margin:0}
-.ish-eyebrow{font-size:12px;font-weight:800;color:var(--ish-primary)}
+.ish-eyebrow{font-size:12px;font-weight:800;color:var(--ish-primary-text)}
 .ish-muted{color:var(--ish-muted)}
 .ish-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap}
 .ish-head>div{display:flex;flex-direction:column;gap:4px}
-.ish-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;cursor:pointer;background:var(--ish-primary);color:#fff;font:inherit;font-weight:700;font-size:14px;border-radius:12px;padding:11px 18px;transition:filter .2s,transform .2s;text-decoration:none}
+.ish-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;cursor:pointer;background:var(--ish-primary);color:var(--ish-on-primary);font:inherit;font-weight:700;font-size:14px;border-radius:12px;padding:11px 18px;transition:filter .2s,transform .2s;text-decoration:none}
 .ish-btn:hover{filter:brightness(1.1)}
 .ish-btn:active{transform:scale(.98)}
 .ish-btn--light{background:#fff;color:var(--ish-ink)}
 .ish-btn--ghost{background:transparent;color:inherit;border:1.5px solid currentColor}
-.ish-btn--outline{background:#fff;color:var(--ish-primary);border:1.5px solid var(--ish-primary)}
+.ish-btn--outline{background:#fff;color:var(--ish-primary-text);border:1.5px solid var(--ish-primary)}
 .ish-btn[disabled]{opacity:.45;cursor:not-allowed}
 .ish-loading{opacity:.6;pointer-events:none}
 .ish button{font:inherit;cursor:pointer}
@@ -38,9 +41,9 @@
 .ish-card__img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
 .ish-card:hover .ish-card__img img{transform:scale(1.05)}
 .ish-card__name{font-weight:700;line-height:1.5;color:inherit;text-decoration:none;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:42px}
-.ish-badge{position:absolute;top:18px;right:18px;background:var(--ish-orange);color:#fff;font-weight:800;font-size:11px;border-radius:7px;padding:3px 8px}
+.ish-badge{position:absolute;top:18px;right:18px;background:var(--ish-orange-text);color:#fff;font-weight:800;font-size:11px;border-radius:7px;padding:3px 8px}
 .ish-price{display:flex;align-items:baseline;gap:8px;margin-top:auto;flex-wrap:wrap}
-.ish-price b{font-size:18px;color:var(--ish-primary);font-weight:800}
+.ish-price b{font-size:18px;color:var(--ish-primary-text);font-weight:800}
 .ish-price s{font-size:12px;color:var(--ish-muted)}
 .ish-card .ish-btn{width:100%}
 
@@ -54,13 +57,13 @@
 .ish-stock{display:flex;flex-direction:column;gap:4px;font-size:11px;color:var(--ish-muted)}
 .ish-stock i{display:block;height:6px;border-radius:3px;background:#FBE3D6;overflow:hidden}
 .ish-stock i b{display:block;height:100%;background:linear-gradient(90deg,#FF9E33,var(--ish-orange))}
-.ish-stock strong{color:var(--ish-orange)}
+.ish-stock strong{color:var(--ish-orange-text)}
 
 /* shop the setup */
 .ish-setup{display:grid;grid-template-columns:1fr 340px;gap:22px}
 .ish-scene{position:relative;min-height:520px;border-radius:28px;overflow:hidden;background:#0B1220;isolation:isolate}
 .ish-scene>img.ish-scene__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1}
-.ish-pin{position:absolute;padding:0;line-height:1;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:#fff;color:var(--ish-primary);display:grid;place-items:center;font-weight:900;font-size:18px;border:0;box-shadow:0 0 0 6px rgba(255,255,255,.22);z-index:3;cursor:pointer}
+.ish-pin{position:absolute;padding:0;line-height:1;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:#fff;color:var(--ish-primary-text);display:grid;place-items:center;font-weight:900;font-size:18px;border:0;box-shadow:0 0 0 6px rgba(255,255,255,.22);z-index:3;cursor:pointer}
 .ish-pin::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid #fff;animation:ish-ping 2s infinite}
 @keyframes ish-ping{to{transform:scale(1.8);opacity:0}}
 .ish-pin[aria-pressed="true"]{background:var(--ish-orange);color:#fff}
@@ -73,8 +76,8 @@
 .ish-row img{width:64px;height:64px;border-radius:12px;object-fit:cover;flex:none}
 .ish-row__mid{flex:1;min-width:0;display:flex;flex-direction:column}
 .ish-row__mid span{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ish-row__mid b{color:var(--ish-primary)}
-.ish-plus{width:40px;height:40px;border-radius:12px;background:var(--ish-primary);color:#fff;display:grid;place-items:center;flex:none;border:0;cursor:pointer}
+.ish-row__mid b{color:var(--ish-primary-text)}
+.ish-plus{width:40px;height:40px;border-radius:12px;background:var(--ish-primary);color:var(--ish-on-primary);display:grid;place-items:center;flex:none;border:0;cursor:pointer}
 .ish-total{background:var(--ish-ink);color:#fff;border-radius:18px;padding:16px;display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:auto}
 
 /* quiz */
@@ -92,15 +95,16 @@
 .ish-opt{background:#fff;border:2px solid var(--ish-line);border-radius:20px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:10px;font-weight:800;color:var(--ish-text);transition:border-color .2s,transform .2s,box-shadow .2s}
 .ish-opt:hover{border-color:var(--ish-primary);transform:translateY(-3px);box-shadow:0 14px 30px rgba(23,70,209,.12)}
 .ish-opt img{width:84px;height:84px;border-radius:16px;object-fit:cover}
-.ish-opt .ish-ico{width:64px;height:64px;border-radius:18px;background:rgba(23,70,209,.08);color:var(--ish-primary);display:grid;place-items:center;font-size:26px;font-weight:900}
+.ish-opt .ish-ico{width:64px;height:64px;border-radius:18px;background:rgba(23,70,209,.08);color:var(--ish-primary-text);display:grid;place-items:center;font-size:26px;font-weight:900}
 .ish-opt small{font-weight:500;color:var(--ish-muted)}
 
 /* compare */
 .ish-cmpwrap{border:1px solid var(--ish-line);border-radius:22px;overflow:auto;background:#fff}
 .ish-cmp{width:100%;border-collapse:collapse;table-layout:fixed;min-width:640px}
-.ish-cmp td{padding:12px 16px;border-bottom:1px solid var(--ish-line);text-align:center;vertical-align:middle}
-.ish-cmp td:first-child{text-align:right;color:var(--ish-muted);font-weight:600;width:170px;background:var(--ish-cloud)}
-.ish-cmp tr:last-child td{border-bottom:0}
+.ish-cmp th{font-weight:inherit}
+.ish-cmp td,.ish-cmp th{padding:12px 16px;border-bottom:1px solid var(--ish-line);text-align:center;vertical-align:middle}
+.ish-cmp th[scope=row],.ish-cmp tr>:first-child{text-align:right;color:var(--ish-muted);font-weight:600;width:170px;background:var(--ish-cloud)}
+.ish-cmp tr:last-child>*{border-bottom:0}
 .ish-cmp select{font:inherit;border:1.5px solid var(--ish-line);border-radius:10px;padding:8px;width:100%;font-weight:700;background:#fff;color:var(--ish-text)}
 .ish-cmp img{width:120px;height:120px;object-fit:cover;border-radius:14px;margin:10px auto 6px;display:block}
 .ish-cmp td.best{background:rgba(18,161,80,.08);color:var(--ish-success);font-weight:800}
@@ -114,7 +118,7 @@
 .ish-fbt__it img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px}
 .ish-fbt__it input{position:absolute;top:16px;right:16px;width:18px;height:18px;accent-color:var(--ish-primary)}
 .ish-fbt__it span{font-size:12px;font-weight:700;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.ish-fbt__it b{color:var(--ish-primary);margin-top:auto}
+.ish-fbt__it b{color:var(--ish-primary-text);margin-top:auto}
 .ish-sum{background:var(--ish-cloud);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:10px}
 .ish-sum .r{display:flex;justify-content:space-between}
 .ish-calc{display:grid;grid-template-columns:1fr 1fr;gap:22px}
@@ -122,7 +126,7 @@
 .ish-plans{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .ish-plans button,.ish-conds button{border:1.5px solid var(--ish-line);border-radius:14px;padding:12px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;font-weight:800;background:#fff;color:var(--ish-text)}
 .ish-plans button small,.ish-conds button small{font-weight:600;color:var(--ish-muted);font-size:11px}
-.ish-plans button[aria-pressed="true"],.ish-conds button[aria-pressed="true"]{border-color:var(--ish-primary);color:var(--ish-primary);background:rgba(23,70,209,.05)}
+.ish-plans button[aria-pressed="true"],.ish-conds button[aria-pressed="true"]{border-color:var(--ish-primary);color:var(--ish-primary-text);background:rgba(23,70,209,.05)}
 .ish-tag{border-radius:6px;padding:2px 8px;font-weight:800;font-size:12px;direction:ltr;color:#0B1220}
 .ish-tag--tabby{background:#3BFFC1}.ish-tag--tamara{background:#F7C8B4}
 .ish-sched{display:flex;gap:6px}
@@ -140,7 +144,7 @@
 .ish-faq details{border-bottom:1px solid var(--ish-line);padding:15px 0}
 .ish-faq summary{font-weight:700;cursor:pointer;display:flex;justify-content:space-between;list-style:none}
 .ish-faq summary::-webkit-details-marker{display:none}
-.ish-faq summary::after{content:"+";color:var(--ish-primary);font-size:20px;line-height:1}
+.ish-faq summary::after{content:"+";color:var(--ish-primary-text);font-size:20px;line-height:1}
 .ish-faq details[open] summary::after{content:"−"}
 .ish-faq p{color:var(--ish-muted);margin:8px 0 0}
 .ish-faq mark{background:rgba(255,176,32,.35);color:inherit;border-radius:3px}
@@ -169,7 +173,7 @@ custom-salla-product-card:hover .ish-qv,.ish-qv:focus-visible{opacity:1;transfor
 @media (max-width:767px){
   .ish-mbar{display:grid;position:fixed;bottom:0;inset-inline:0;z-index:9980;grid-template-columns:repeat(5,1fr);background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-top:1px solid var(--ish-line);padding:8px 4px calc(8px + env(safe-area-inset-bottom));direction:rtl;font-family:inherit}
   .ish-mbar a{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;color:var(--ish-muted);text-decoration:none;position:relative}
-  .ish-mbar a.on{color:var(--ish-primary);font-weight:700}
+  .ish-mbar a.on{color:var(--ish-primary-text);font-weight:700}
   .ish-mbar svg{width:22px;height:22px}
   .ish-mbar .ish-cnt{position:absolute;top:-4px;left:calc(50% - 22px);background:var(--ish-orange);color:#fff;border-radius:999px;font-size:10px;min-width:16px;height:16px;display:grid;place-items:center;padding:0 4px}
   body.ish-has-mbar{padding-bottom:64px}
@@ -223,7 +227,7 @@ custom-salla-product-card:hover .ish-qv,.ish-qv:focus-visible{opacity:1;transfor
 
 /* ================= basic home sections ================= */
 .ish-pill{display:inline-block;align-self:flex-start;font-size:12px;font-weight:800;border-radius:999px;padding:5px 12px;background:rgba(255,255,255,.14);color:#fff}
-.ish-more{color:var(--ish-primary);font-weight:700;text-decoration:none;font-size:14px}
+.ish-more{color:var(--ish-primary-text);font-weight:700;text-decoration:none;font-size:14px}
 .ish-lead{opacity:.75;margin:-10px 0 22px}
 
 /* hero */
@@ -254,7 +258,7 @@ custom-salla-product-card:hover .ish-qv,.ish-qv:focus-visible{opacity:1;transfor
 .ish-cat{flex:0 0 auto;width:112px;display:flex;flex-direction:column;align-items:center;gap:10px;text-decoration:none;color:var(--ish-text);font-weight:700;font-size:14px;text-align:center}
 .ish-cat__img{width:96px;height:96px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:rgba(23,70,209,.08);border:2px solid var(--ish-line);transition:border-color .2s,transform .2s}
 .ish-cat__img img{width:100%;height:100%;object-fit:cover}
-.ish-cat__img b{font-size:34px;font-weight:900;color:var(--ish-primary)}
+.ish-cat__img b{font-size:34px;font-weight:900;color:var(--ish-primary-text)}
 .ish-cat:hover .ish-cat__img{border-color:var(--ish-primary);transform:translateY(-3px)}
 
 /* features */
@@ -305,7 +309,7 @@ custom-salla-product-card:hover .ish-qv,.ish-qv:focus-visible{opacity:1;transfor
 
 /* video */
 .ish-yt{position:relative;display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:24px;overflow:hidden;background:#000 center/cover no-repeat;padding:0}
-.ish-yt span{position:absolute;inset:0;margin:auto;width:84px;height:84px;border-radius:50%;background:var(--ish-primary);color:#fff;font-size:30px;display:grid;place-items:center;box-shadow:0 0 0 12px rgba(255,255,255,.2)}
+.ish-yt span{position:absolute;inset:0;margin:auto;width:84px;height:84px;border-radius:50%;background:var(--ish-primary);color:var(--ish-on-primary);font-size:30px;display:grid;place-items:center;box-shadow:0 0 0 12px rgba(255,255,255,.2)}
 .ish-yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
 /* story */
@@ -336,7 +340,7 @@ custom-salla-product-card:hover .ish-qv,.ish-qv:focus-visible{opacity:1;transfor
 .ish-rev blockquote{margin:0;line-height:1.8;flex:1}
 .ish-rev figcaption{display:flex;align-items:center;gap:10px}
 .ish-rev figcaption small{display:block;color:var(--ish-muted)}
-.ish-avatar{width:42px;height:42px;border-radius:50%;background:var(--ish-primary);color:#fff;display:grid;place-items:center;font-weight:900}
+.ish-avatar{width:42px;height:42px;border-radius:50%;background:var(--ish-primary);color:var(--ish-on-primary);display:grid;place-items:center;font-weight:900}
 
 @media (max-width:1023px){
   .ish-row-scroll{grid-auto-columns:calc((100% - 40px)/3)}
@@ -396,7 +400,7 @@ custom-salla-product-card:hover .ish-qv,.ish-qv:focus-visible{opacity:1;transfor
 .ish-coll__chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:14px 2px 4px}
 .ish-coll__chips::-webkit-scrollbar{display:none}
 .ish-coll__chips a{flex:none;text-decoration:none;color:var(--ish-text);border:1px solid var(--ish-line);background:#fff;border-radius:999px;padding:8px 16px;font-weight:700;font-size:14px;transition:border-color .2s,color .2s}
-.ish-coll__chips a:hover{border-color:var(--ish-primary);color:var(--ish-primary)}
+.ish-coll__chips a:hover{border-color:var(--ish-primary);color:var(--ish-primary-text)}
 .ish-coll__chips a[aria-current]{background:var(--ish-ink);border-color:var(--ish-ink);color:#fff}
 @media (max-width:767px){
   .ish-coll__band{grid-template-columns:1fr;padding:24px 20px;min-height:0;gap:12px}
@@ -426,7 +430,7 @@ custom-salla-product-card:hover .ish-qv,.ish-qv:focus-visible{opacity:1;transfor
 .ish-sticky img{width:48px;height:48px;border-radius:10px;object-fit:cover;flex:none;background:var(--ish-cloud)}
 .ish-sticky__txt{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.4}
 .ish-sticky__txt span{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ish-sticky__txt b{color:var(--ish-primary);font-variant-numeric:tabular-nums}
+.ish-sticky__txt b{color:var(--ish-primary-text);font-variant-numeric:tabular-nums}
 .ish-sticky .ish-btn{flex:none;min-width:150px}
 body.ish-has-sticky{padding-bottom:72px}
 .ish-top{position:fixed;z-index:85;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(24px + env(safe-area-inset-bottom,0px));width:44px;height:44px;border-radius:50%;border:1px solid var(--ish-line);background:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 8px 20px rgba(11,18,32,.12);padding:0}
@@ -453,7 +457,7 @@ body.ish-has-sticky .ish-top{bottom:calc(88px + env(safe-area-inset-bottom,0px))
 .ish-show__tabs::-webkit-scrollbar{display:none}
 .ish-show__tabs a{flex:none;text-decoration:none;color:var(--ish-muted);font-weight:700;font-size:15px;padding:12px 14px;border-bottom:3px solid transparent;transition:color .2s,border-color .2s}
 .ish-show__tabs a:hover{color:var(--ish-ink)}
-.ish-show__tabs a[aria-current]{color:var(--ish-primary);border-bottom-color:var(--ish-primary)}
+.ish-show__tabs a[aria-current]{color:var(--ish-primary-text);border-bottom-color:var(--ish-primary)}
 .ish-show__picks{margin-top:28px}
 .ish-show__bento{display:grid;grid-template-columns:1.25fr 1fr;grid-template-rows:auto auto;gap:16px}
 .ish-spot{position:relative;display:grid;grid-template-columns:44% minmax(0,1fr);align-items:center;gap:16px;background:var(--ish-cloud);border-radius:var(--ish-radius);padding:14px;color:var(--ish-text);min-width:0}
@@ -465,13 +469,13 @@ body.ish-has-sticky .ish-top{bottom:calc(88px + env(safe-area-inset-bottom,0px))
 .ish-spot__img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
 .ish-spot:hover .ish-spot__img img{transform:scale(1.04)}
 .ish-spot__txt{display:flex;flex-direction:column;gap:8px;min-width:0;align-items:flex-start}
-.ish-spot__label{font-size:12px;font-weight:800;color:var(--ish-orange)}
+.ish-spot__label{font-size:12px;font-weight:800;color:var(--ish-orange-text)}
 .ish-spot__name{font-weight:800;font-size:16px;line-height:1.45;color:var(--ish-ink);text-decoration:none;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .ish-spot--big .ish-spot__name{font-size:22px}
-.ish-spot__name:hover{color:var(--ish-primary)}
+.ish-spot__name:hover{color:var(--ish-primary-text)}
 .ish-spot--big .ish-price b{font-size:22px}
 .ish-spot .ish-heart{position:absolute;top:22px;left:auto;inset-inline-start:22px;z-index:2}
-.ish-btn--ghost{background:#fff;color:var(--ish-primary);box-shadow:inset 0 0 0 1.5px var(--ish-primary)}
+.ish-btn--ghost{background:#fff;color:var(--ish-primary-text);box-shadow:inset 0 0 0 1.5px var(--ish-primary)}
 .ish-viewbar{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin:0 0 14px;font-size:13px;color:var(--ish-muted)}
 .ish-viewbar [role=group]{display:flex;background:var(--ish-cloud);border-radius:12px;padding:3px}
 .ish-viewbar button{display:inline-flex;align-items:center;gap:6px;border:0;background:transparent;font:inherit;font-weight:700;color:var(--ish-muted);border-radius:9px;padding:7px 12px;cursor:pointer}
@@ -536,8 +540,8 @@ html.ish-noscroll{overflow:hidden}
 .ish-dline__img img{width:100%;height:100%;object-fit:cover}
 .ish-dline__mid{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
 .ish-dline__name{font-weight:700;font-size:14px;line-height:1.5;color:var(--ish-ink);text-decoration:none;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.ish-dline__name:hover{color:var(--ish-primary)}
-.ish-dline__mid>b{color:var(--ish-primary);font-variant-numeric:tabular-nums}
+.ish-dline__name:hover{color:var(--ish-primary-text)}
+.ish-dline__mid>b{color:var(--ish-primary-text);font-variant-numeric:tabular-nums}
 .ish-dline__row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:2px}
 .ish-qty{display:inline-flex;align-items:center;border:1px solid var(--ish-line);border-radius:10px;overflow:hidden}
 .ish-qty button{width:34px;height:32px;border:0;background:#fff;font:inherit;font-size:18px;cursor:pointer;color:var(--ish-ink)}
@@ -552,7 +556,7 @@ html.ish-noscroll{overflow:hidden}
 .ish-drawer__sum b{font-size:20px;font-variant-numeric:tabular-nums}
 .ish-drawer__foot small{color:var(--ish-muted);font-size:12px;margin-top:-6px}
 .ish-drawer__foot .ish-btn{width:100%;padding:14px}
-.ish-drawer__link{text-align:center;font-weight:700;font-size:14px;color:var(--ish-primary);text-decoration:none;padding:4px}
+.ish-drawer__link{text-align:center;font-weight:700;font-size:14px;color:var(--ish-primary-text);text-decoration:none;padding:4px}
 .ish-drawer__link:hover{text-decoration:underline}
 .ish-drawer__note{margin:0;color:var(--ish-muted)}
 .ish-drawer__empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;color:var(--ish-muted);padding:40px 0}
@@ -641,3 +645,9 @@ custom-salla-product-card:empty{display:block;min-height:330px}
 
 /* reserve room for the footer payment logos (no layout shift when they load) */
 salla-payments{display:block;min-height:32px}
+
+/* home sections built after load: space is held so nothing below jumps (CLS) */
+.ish-slot--flash{min-height:420px}.ish-slot--setup{min-height:600px}.ish-slot--quiz{min-height:500px}.ish-slot--compare{min-height:560px}.ish-basics.ish-slot{min-height:1400px}
+@media (max-width:767px){.ish-slot--flash{min-height:520px}.ish-slot--setup{min-height:1150px}.ish-slot--quiz{min-height:760px}.ish-slot--compare{min-height:520px}.ish-basics.ish-slot{min-height:1600px}}
+.ish-slot.ish-slot--done{min-height:0}
+.ish-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}

@@ -495,15 +495,15 @@
       var vals = list.map(r[1]);
       var nums = vals.filter(function (v) { return typeof v === 'number' && v > 0; });
       var best = r[3] && nums.length > 1 ? (r[3] === 'max' ? Math.max.apply(null, nums) : Math.min.apply(null, nums)) : null;
-      return '<tr><td>' + r[0] + '</td>' + vals.map(function (v) { return '<td class="' + (best !== null && v === best ? 'best' : '') + '">' + r[2](v) + '</td>'; }).join('') + '</tr>';
+      return '<tr><th scope="row">' + r[0] + '</th>' + vals.map(function (v) { return '<td class="' + (best !== null && v === best ? 'best' : '') + '">' + r[2](v) + '</td>'; }).join('') + '</tr>';
     }).join('');
   }
   function cmpTable(list, options) {
-    var headRow = '<tr><td>' + (options ? 'اختر المنتج' : '') + '</td>' + list.map(function (p, i) {
-      return '<td>' + (options ? '<select data-ish-cmpsel="' + i + '" aria-label="المنتج ' + (i + 1) + '">' + options.map(function (o) { return '<option value="' + o.id + '"' + (o.id === p.id ? ' selected' : '') + '>' + esc(o.name) + '</option>'; }).join('') + '</select>' : '') +
-        '<img src="' + esc(imgOf(p)) + '" alt=""><b style="display:block;line-height:1.4">' + esc(p.name) + '</b></td>';
+    var headRow = '<tr><th scope="col">' + (options ? 'اختر المنتج' : 'المنتج') + '</th>' + list.map(function (p, i) {
+      return '<th scope="col">' + (options ? '<select data-ish-cmpsel="' + i + '" aria-label="المنتج ' + (i + 1) + '">' + options.map(function (o) { return '<option value="' + o.id + '"' + (o.id === p.id ? ' selected' : '') + '>' + esc(o.name) + '</option>'; }).join('') + '</select>' : '') +
+        '<img src="' + esc(imgOf(p)) + '" alt=""><b style="display:block;line-height:1.4">' + esc(p.name) + '</b></th>';
     }).join('') + '</tr>';
-    var foot = '<tr><td></td>' + list.map(function (p) { return '<td><button type="button" class="ish-btn" style="width:100%" data-ish-add="' + p.id + '">' + (p.has_options ? 'اختر الخيارات' : 'أضف للسلة') + '</button></td>'; }).join('') + '</tr>';
+    var foot = '<tr><th scope="row"><span class="ish-sr">أضف</span></th>' + list.map(function (p) { return '<td><button type="button" class="ish-btn" style="width:100%" data-ish-add="' + p.id + '">' + (p.has_options ? 'اختر الخيارات' : 'أضف للسلة') + '</button></td>'; }).join('') + '</tr>';
     return '<div class="ish-cmpwrap"><table class="ish-cmp"><tbody>' + headRow + cmpRows(list) + foot + '</tbody></table></div>';
   }
   function compare(holder) {
@@ -1311,7 +1311,28 @@
     var go = function () { setTimeout(function () { idle(next, { timeout: 1500 }); }, 200); };
     if (document.readyState === 'complete') go(); else window.addEventListener('load', go);
   }
+  // a box that holds space for a section built later; let go once its content is about as tall (or gone)
+  function slot(parent, k, el) {
+    var d = el || document.createElement('div'); d.classList.add('ish-slot'); if (k) d.classList.add('ish-slot--' + k); if (!el) parent.appendChild(d);
+    var ro, timer, need = function () { return parseFloat(getComputedStyle(d).minHeight) || 0; };
+    var done = function () { d.classList.add('ish-slot--done'); if (ro) ro.disconnect(); mo.disconnect(); clearTimeout(timer); };
+    var check = function () { if (!d.firstElementChild) return done(); var h = 0; for (var c = d.firstElementChild; c; c = c.nextElementSibling) h += c.offsetHeight; if (h >= need() * 0.9) done(); };
+    if (window.ResizeObserver) ro = new ResizeObserver(check);
+    var mo = new MutationObserver(function () { if (!timer) timer = setTimeout(done, 6000); for (var c = d.firstElementChild; c; c = c.nextElementSibling) if (ro) ro.observe(c); check(); });
+    mo.observe(d, { childList: true });
+    return d;
+  }
+  // a readable shade of the store colour for text on white (a light store colour is unreadable as text)
+  function primaryText() {
+    var css = getComputedStyle(document.documentElement).getPropertyValue('--color-primary').trim(), m = /^#?([0-9a-f]{6})$/i.exec(css);
+    if (!m) return;
+    var rgb = [0, 2, 4].map(function (i) { return parseInt(m[1].substr(i, 2), 16); });
+    var lum = function (c) { var v = c.map(function (x) { x /= 255; return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4); }); return 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2]; };
+    var k = 1; while (1.05 / (lum(rgb.map(function (x) { return x * k; })) + 0.05) < 4.8 && k > 0.05) k -= 0.05;
+    if (k < 1) document.documentElement.style.setProperty('--ish-primary-text', 'rgb(' + rgb.map(function (x) { return Math.round(x * k); }).join(',') + ')');
+  }
   function start() {
+    try { primaryText(); } catch (e) {}
     var slug = page().slug || '';
     var isHome = slug === 'index' || document.body.classList.contains('index');
     if (isHome) {
@@ -1326,10 +1347,13 @@
         if (latest && !latest.closest('.ish')) holder.parentNode.insertBefore(latest, holder);   // new products right after the hero
         var bh = document.createElement('div'); bh.className = 'ish-home ish-basics';
         holder.parentNode.insertBefore(bh, holder.nextSibling);
+        var C = CONFIG.home, sl = {};
+        ['flash', 'setup', 'quiz', 'compare'].forEach(function (k) { if (C[k === 'flash' ? 'flashSale' : k].enabled) sl[k] = slot(holder, k); });
+        slot(null, '', bh);
         // the sections below the fold are built after the page has loaded, one at a time,
         // so they don't slow down the first screen (speed score: LCP and blocking time)
-        afterLoad([function () { flashSale(holder); }, function () { setup(holder); }, function () { quiz(holder); },
-                   function () { compare(holder); }, function () { basics(bh); }]);
+        afterLoad([function () { flashSale(sl.flash || holder); }, function () { setup(sl.setup || holder); }, function () { quiz(sl.quiz || holder); },
+                   function () { compare(sl.compare || holder); }, function () { basics(bh); }]);
       }
     }
     if (slug === 'product.single' || document.body.classList.contains('product-single')) productPage();
