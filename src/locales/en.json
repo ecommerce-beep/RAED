@@ -1,0 +1,38 @@
+{
+  "blocks": {
+    "header": {
+      "cart": "Cart"
+    },
+    "appBanner": {
+      "download_now": "download now"
+    }
+  },
+  "pages": {
+    "cart": {
+      "cart_options": "Cart Options"
+    },
+    "products": {
+      "barcode": "Barcode"
+    },
+    "order": {
+      "can_edit_or_delete_your_review_within": "You can edit or delete your review within",
+      "edit_period_ended": "The period to edit the review has ended",
+      "delete_period_ended": "The period to delete the review has ended",
+      "days_since_added": "days since it was added",
+      "option_name": "Option name",
+      "option_content": "Content"
+    },
+    "thank_you": {
+      "view_invoice": "View invoice",
+      "contact_us": "Got a question? We are happy to hear from you",
+      "cashback": "Cashback",
+      "loyalty_points": "Loyalty points",
+      "gifts_title": "Gifts you cannot miss 🎉",
+      "order_received": "Thank you for shopping with us. We are working on your order."
+    }
+  },
+  "common": {
+    "bank_offer_sub_title_multiple": "Pay for your purchases via one of the following bank cards and get the specified discount",
+    "bank_offer_sub_title_single": "Pay for your purchases via :bank_name bank card and get discount"
+  }
+}
