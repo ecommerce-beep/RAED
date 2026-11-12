@@ -146,7 +146,7 @@
   @apply items-center flex my-2 lg:my-0;
 
   img {
-    @apply w-auto max-h-12 max-w-[100px] xs:max-w-[170px];
+    @apply w-auto h-12 max-h-12 max-w-[100px] xs:max-w-[170px] object-contain;
   }
 }
 

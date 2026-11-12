@@ -638,3 +638,6 @@ html.ish-noscroll{overflow:hidden}
 .s-block--latest-products salla-products-list:not(:has(custom-salla-product-card)),
 .product-index salla-products-list:not(:has(custom-salla-product-card)){display:block;min-height:100vh}
 custom-salla-product-card:empty{display:block;min-height:330px}
+
+/* reserve room for the footer payment logos (no layout shift when they load) */
+salla-payments{display:block;min-height:32px}
