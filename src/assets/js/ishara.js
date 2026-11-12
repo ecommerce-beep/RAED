@@ -1378,7 +1378,7 @@
         .observe(document.body, { childList: true, subtree: true });
     }
     if (slug === 'cart' || document.body.classList.contains('cart')) freeShipping();
-    }, backToTop, mobileBar, cartDrawer]);
+    }, mobileBar, backToTop, cartDrawer]);
   }
   if (window.salla && typeof salla.onReady === 'function') salla.onReady(start);
   else document.addEventListener('DOMContentLoaded', function () { (window.salla && salla.onReady) ? salla.onReady(start) : start(); });
